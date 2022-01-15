@@ -1,21 +1,65 @@
-
-function addManager(){
-    // return this html for manager
+// return card html for manager
+function addManager(manager){
+    return `
+    <div class="col-md-4 col-sm-1">
+        <div class="card border-info mb-3">
+            <div class="card-header text-white bg-info bg-gradient">
+                <h5 class="card-title">${manager.name}</h5>
+                <h6 class="card-subtitle"><i class="fas fa-crown"></i> Manager</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${manager.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${manager.email}">${manager.email}</a></li>
+                    <li class="list-group-item">Office Number: ${manager.officeNum}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    `;
 }
 
-function addIntern(){
-    // return this html for intern
-
-    // if no intern, return blank ''
-
+function addEngineer(engineer) {
+    return `
+    <div class="col-md-4 col-sm-1">
+        <div class="card border-info mb-3">
+            <div class="card-header text-white bg-info bg-gradient">
+                <h5 class="card-title">${engineer.name}</h5>
+                <h6 class="card-subtitle"><i class="fas fa-hat-wizard"></i> Engineer</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${engineer.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${engineer.email}">${engineer.email}</a></li>
+                    <li class="list-group-item">Github: <a href="https://github.com/${engineer.gitHubId}" target="_blank">${engineer.gitHubId}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    `;
 }
 
-function addEngineer() {
-    // return this html for engineer
-    // if no engineer, return blank ''
+function addIntern(intern){
+    return `
+    <div class="col-md-4 col-sm-1">
+        <div class="card border-info mb-3">
+            <div class="card-header text-white bg-info bg-gradient">
+                <h5 class="card-title">${intern.name}</h5>
+                <h6 class="card-subtitle"><i class="fas fa-book"></i> Intern</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${intern.id}</li>
+                    <li class="list-group-item">Email: <a href="mailto: ${intern.email}">${intern.email}</a></li>
+                    <li class="list-group-item">School:${intern.school}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    `;
 }
 
-function generatePage(){
+function generateTop(){
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -35,91 +79,25 @@ function generatePage(){
     
         <!-- container holding the team members -->
         <main class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-1">
-                    <div class="card border-info mb-3">
-                        <div class="card-header text-white bg-info bg-gradient">
-                            <h5 class="card-title">Name</h5>
-                            <h6 class="card-subtitle"><i class="fas fa-crown"></i> Manager</h6>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: 1</li>
-                                <li class="list-group-item">Email: <a href="mailto: email@email.com">email@email.com</a></li>
-                                <li class="list-group-item">Office Number: 1</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-4 col-sm-1">
-                    <div class="card border-info mb-3">
-                        <div class="card-header text-white bg-info bg-gradient">
-                            <h5 class="card-title">Name</h5>
-                            <h6 class="card-subtitle"><i class="fas fa-hat-wizard"></i> Engineer</h6>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: 2</li>
-                                <li class="list-group-item">Email: <a href="mailto: email@email.com">email@email.com</a></li>
-                                <li class="list-group-item">Github: <a href="#" target="_blank">githubName</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-4 col-sm-1">
-                    <div class="card border-info mb-3">
-                        <div class="card-header text-white bg-info bg-gradient">
-                            <h5 class="card-title">Name</h5>
-                            <h6 class="card-subtitle"><i class="fas fa-hat-wizard"></i> Engineer</h6>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: 3</li>
-                                <li class="list-group-item">Email: <a href="mailto: email@email.com">email@email.com</a></li>
-                                <li class="list-group-item">Github: <a href="#" target="_blank">githubName</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-4 col-sm-1">
-                    <div class="card border-info mb-3">
-                        <div class="card-header text-white bg-info bg-gradient">
-                            <h5 class="card-title">Name</h5>
-                            <h6 class="card-subtitle"><i class="fas fa-hat-wizard"></i> Engineer</h6>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: 4</li>
-                                <li class="list-group-item">Email: <a href="mailto: email@email.com">email@email.com</a></li>
-                                <li class="list-group-item">Github: <a href="#" target="_blank">githubName</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-4 col-sm-1">
-                    <div class="card border-info mb-3">
-                        <div class="card-header text-white bg-info bg-gradient">
-                            <h5 class="card-title">Name</h5>
-                            <h6 class="card-subtitle"><i class="fas fa-book"></i> Intern</h6>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">ID: 5</li>
-                                <li class="list-group-item">Email: <a href="mailto: email@email.com">email@email.com</a></li>
-                                <li class="list-group-item">School: University Name</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="row">`;
+}
+
+
+function generateBottom(){
+    return `
+                    
             </div>
         </main>
-    
+
     </body>
     </html>`;
 }
+// ^ need to find out how to insert each team member into middle of html
 
-module.exports = generatePage;
+module.exports = { 
+    generateTop, 
+    generateBottom,
+    addEngineer,
+    addIntern,
+    addManager
+};
