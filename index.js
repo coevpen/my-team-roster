@@ -6,7 +6,7 @@ const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
 
-// copy css to dist foler
+// copy css to dist folder
 const copyFile = () => {
     return new Promise((resolve, reject) => {
       fs.copyFile('./src/style.css', './dist/style.css', err => {
@@ -62,10 +62,10 @@ const initManager = () => {
       .prompt([
         {
             type: 'input',
-            name: 'Manager',
-            message: `What is the team manager's name?`,
-            validate: managerName => {
-                if(managerName){
+            name: 'name',
+            message: "What is the team manager's name?",
+            validate: name => {
+                if(name){
                     return true;
                 }
                 else{
@@ -76,55 +76,14 @@ const initManager = () => {
         },
         {
             type: 'input',
-            name: 'description',
-            message: questions[1],
-            validate: descrip => {
-                if(descrip){
+            name: 'id',
+            message: "What is the team manager's id?",
+            validate: id => {
+                if(id){
                     return true;
                 }
                 else{
-                    console.log("Please enter a description of your project.");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'installation',
-            message: questions[2],
-            validate: installation => {
-                if(installation){
-                    return true;
-                }
-                else{
-                    console.log("Please enter installation instructions.");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'input',
-            name: 'usage',
-            message: questions[3],
-            default: 'N/A'
-        },
-        {
-            type: 'checkbox',
-            name: 'license',
-            message: questions[4],
-            choices: ['MIT', 'PDDL','Artistic License 2.0', 'None']
-            
-        },
-        {
-            type: 'input',
-            name: 'username',
-            message: questions[5],
-            validate: username => {
-                if(username){
-                    return true;
-                }
-                else{
-                    console.log("Please enter your Github username.");
+                    console.log("Please enter an ID numer.");
                     return false;
                 }
             }
@@ -132,37 +91,43 @@ const initManager = () => {
         {
             type: 'input',
             name: 'email',
-            message: questions[6],
+            message: "What is the team manager's email?",
             validate: email => {
                 if(email){
                     return true;
                 }
                 else{
-                    console.log("Please enter an email address for contact.");
+                    console.log("Please enter an email address.");
                     return false;
                 }
             }
         },
         {
             type: 'input',
-            name: 'contribution',
-            message: questions[7],
-            default: 'N/A'
-        },
-        {
-            type: 'input',
-            name: 'test',
-            message: questions[8],
-            default: 'npm test'
-        },
+            name: 'officeNum',
+            message: "What is the team manger's office number?",
+            validate: officeNum => {
+              if(officeNum){
+                  return true;
+              }
+              else{
+                  console.log("Please enter an office number.");
+                  return false;
+              }
+          }
+        }
       ])
       .then(managerInfo => {
         // create the index.html page with html before the employee cards
         const topPage = generatePage.generateTop();
         writeFile(topPage);
 
+        // creates the manager object with the info given
+        const { name, id, email, officeNum} = managerInfo;
+        const manager = new Manager(name, id, email, officeNum);
+
         // create the manager card and append it to the html page
-        const managerHTML = generatePage.addManager(managerInfo);
+        const managerHTML = generatePage.addManager(manager);
         appendFile(managerHTML);
       })
 };
