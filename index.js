@@ -80,6 +80,7 @@ const initManager = () => {
 
         // create the manager card and append it to the html page
         const managerHTML = generatePage.addManager(manager);
+
         fileWriting.appendFile(managerHTML);
       })
 };
@@ -179,8 +180,8 @@ const addEmployees = () => {
       // if the team member is an engineer, it'll add the card html for an engineer
       if(role === "Engineer"){
         let engineer = new Engineer(name, id, email, github);
-        let engineerHMTL = generatePage.addEngineer(engineer);
-        fileWriting.appendFile(engineerHMTL);
+        let engineerHTML = generatePage.addEngineer(engineer);
+        fileWriting.appendFile(engineerHTML);
 
       }
       // if the team member is an intern, it'll add the card html for an intern
