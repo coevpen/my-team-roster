@@ -1,3 +1,4 @@
+// includes the employee objects, inquirer, and file writing for html generation
 const inquirer = require('inquirer');
 const fileWriting = require('./src/fileWrite');
 const generatePage = require('./src/page-template');
@@ -6,7 +7,7 @@ const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
 
-// prompt the user for info
+// prompt the user for manager info
 const initManager = () => {
   console.log("Please build your team");
   return inquirer
@@ -83,6 +84,7 @@ const initManager = () => {
       })
 };
 
+// prompts the user to add other team members
 const addEmployees = () => {
   return inquirer
     .prompt([
@@ -90,7 +92,7 @@ const addEmployees = () => {
         type: 'list',
         name: 'role',
         message: "Which type of team member would you like to add?",
-        choices: ['Engineer', 'Intern', "I don't want to add anymore team members"]
+        choices: ['Engineer', 'Intern']
       },
       {
         type: 'input',
@@ -109,7 +111,7 @@ const addEmployees = () => {
       {
         type: 'number',
         name: 'id',
-        message: "What is the team member's id?",
+        message: "What is the team member's ID?",
         validate: id => {
             if(id){
                 return true;
@@ -137,14 +139,14 @@ const addEmployees = () => {
       {
         type: 'input',
         name: 'github',
-        message: "What is your team member's github username?",
+        message: "What is your team member's GitHub username?",
         when: (input) => input.role === "Engineer",
         validate: github => {
           if(github){
               return true;
           }
           else{
-              console.log("Please enter a github username.");
+              console.log("Please enter a GitHub username.");
               return false;
           }
         }
@@ -174,24 +176,28 @@ const addEmployees = () => {
     .then(employeeInfo => {
       let { role, name, id, email, github, school, confirmAddEmployees} = employeeInfo;
 
+      // if the team member is an engineer, it'll add the card html for an engineer
       if(role === "Engineer"){
         let engineer = new Engineer(name, id, email, github);
         let engineerHMTL = generatePage.addEngineer(engineer);
         fileWriting.appendFile(engineerHMTL);
 
       }
+      // if the team member is an intern, it'll add the card html for an intern
       else if(role === "Intern"){
         let intern = new Intern(name, id, email, school);
         let internHTML = generatePage.addIntern(intern);
         fileWriting.appendFile(internHTML);
       }
+
+      // if the user wants to add another team member, the prompt is called once more
       if(confirmAddEmployees){
         addEmployees();
       }
     })
 };
 
-// Function call to initialize app
+// Function call to initialize app and write the full html file
 initManager()
   .then(addEmployees)
   .then(fileWriting.appendFile(generatePage.generateBottom()))

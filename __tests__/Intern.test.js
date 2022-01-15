@@ -13,6 +13,7 @@ test('creates an Intern object', () => {
     
   });
 
+  // tests the get functions for intern
   describe('intern get functions', () => {
     describe('get name', () => {
         it('should return the intern name', () => {

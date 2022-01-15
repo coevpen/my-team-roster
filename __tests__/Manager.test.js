@@ -13,6 +13,7 @@ test('creates a Manager object', () => {
     
   });
 
+  // tests the get functions for manager
   describe('manager get functions', () => {
     describe('get name', () => {
         it('should return the manager name', () => {

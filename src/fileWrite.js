@@ -17,7 +17,7 @@ const copyFile = () => {
     });
 };
 
-//call to write the top of the html page index.html
+// writes the top of the html page index.html
 const writeFile = createHTML => {
   return new Promise((resolve, reject) => {
     fs.writeFile('./dist/index.html', createHTML, err =>{
@@ -33,7 +33,7 @@ const writeFile = createHTML => {
   });
 };
 
-//call to write the middle and bottom parts of the file
+// writes the middle and bottom parts of the file
 const appendFile = bodyContent => {
   return new Promise((resolve, reject) => {
     fs.appendFile('./dist/index.html', bodyContent, err=> {

@@ -13,6 +13,7 @@ test('creates an Engineer object', () => {
     
   });
 
+  // tests the get functions for engineer
   describe('Engineer get functions', () => {
     describe('get name', () => {
         it('should return the Engineer name', () => {

@@ -19,6 +19,7 @@ function addManager(manager){
     `;
 }
 
+// return card html for engineer
 function addEngineer(engineer) {
     return `
     <div class="col-md-4 col-sm-1">
@@ -39,6 +40,7 @@ function addEngineer(engineer) {
     `;
 }
 
+// return card for intern
 function addIntern(intern){
     return `
     <div class="col-md-4 col-sm-1">
@@ -59,6 +61,7 @@ function addIntern(intern){
     `;
 }
 
+// return html for page before employee cards
 function generateTop(){
     return `<!DOCTYPE html>
     <html lang="en">
@@ -82,7 +85,7 @@ function generateTop(){
             <div class="row">`;
 }
 
-
+// return html for after the employee cards
 function generateBottom(){
     return `
                     
@@ -92,7 +95,6 @@ function generateBottom(){
     </body>
     </html>`;
 }
-// ^ need to find out how to insert each team member into middle of html
 
 module.exports = { 
     generateTop, 

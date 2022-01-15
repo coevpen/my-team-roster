@@ -11,14 +11,15 @@ test('creates an employee object', () => {
     
   });
 
-describe('employee get functions', () => {
-    describe('get name', () => {
-        it('should return the employee name', () => {
-        const employee = new Employee('Sana', 1, 'email@email.com');
+  // tests the get functions for
+    describe('employee get functions', () => {
+        describe('get name', () => {
+            it('should return the employee name', () => {
+            const employee = new Employee('Sana', 1, 'email@email.com');
 
-        const name = employee.getName();
+            const name = employee.getName();
 
-        expect(name).toBe('Sana');
+            expect(name).toBe('Sana');
         });
     });
 
