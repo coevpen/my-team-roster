@@ -32,7 +32,7 @@ function addEngineer(engineer) {
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${engineer.id}</li>
                     <li class="list-group-item">Email: <a href="mailto: ${engineer.email}">${engineer.email}</a></li>
-                    <li class="list-group-item">Github: <a href="https://github.com/${engineer.gitHubId}" target="_blank">${engineer.gitHubId}</a></li>
+                    <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.gitHubId}" target="_blank">${engineer.gitHubId}</a></li>
                 </ul>
             </div>
         </div>
