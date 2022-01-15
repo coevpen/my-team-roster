@@ -57,7 +57,7 @@ const appendFile = bodyContent => {
 
 // prompt the user for info
 const initManager = () => {
-  console.log("Please build your team \n");
+  console.log("Please build your team");
   return inquirer
       .prompt([
         {
@@ -136,19 +136,112 @@ const addEmployees = () => {
   return inquirer
     .prompt([
       {
-
-      }
-
+        type: 'list',
+        name: 'role',
+        message: "Which type of team member would you like to add?",
+        choices: ['Engineer', 'Intern', "I don't want to add anymore team members"]
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: "What is the team member's name?",
+        validate: name => {
+            if(name){
+                return true;
+            }
+            else{
+                console.log("Please enter the team member's name.");
+                return false;
+            }
+        }
+      },
+      {
+        type: 'number',
+        name: 'id',
+        message: "What is the team member's id?",
+        validate: id => {
+            if(id){
+                return true;
+            }
+            else{
+                console.log("Please enter an ID numer.");
+                return false;
+            }
+        }
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: "What is the team member's email?",
+        validate: email => {
+            if(email){
+                return true;
+            }
+            else{
+                console.log("Please enter an email address.");
+                return false;
+            }
+        }
+      },
+      {
+        type: 'input',
+        name: 'github',
+        message: "What is your team member's github username?",
+        when: (input) => input.role === "Engineer",
+        validate: github => {
+          if(github){
+              return true;
+          }
+          else{
+              console.log("Please enter a github username.");
+              return false;
+          }
+        }
+      },
+      {
+        type: 'input',
+        name: 'school',
+        message: "What is your team member's school name?",
+        when: (input) => input.role === "Intern",
+        validate: school => {
+          if(school){
+              return true;
+          }
+          else{
+              console.log("Please enter a school.");
+              return false;
+          }
+        }
+      },
+      {
+        type: 'confirm',
+        name: 'confirmAddEmployees',
+        message: "Would you like to add more team members?",
+        default: false
+      },
     ])
     .then(employeeInfo => {
+      let { role, name, id, email, github, school, confirmAddEmployees} = employeeInfo;
 
+      if(role === "Engineer"){
+        let engineer = new Engineer(name, id, email, github);
+        let engineerHMTL = generatePage.addEngineer(engineer);
+        appendFile(engineerHMTL);
+
+      }
+      else if(role === "Intern"){
+        let intern = new Intern(name, id, email, school);
+        let internHTML = generatePage.addIntern(intern);
+        appendFile(internHTML);
+      }
+      if(confirmAddEmployees){
+        addEmployees();
+      }
     })
 };
 
-
-
 // Function call to initialize app
 initManager()
-  .then(addEmployees())
+  .then(addEmployees)
   .then(appendFile(generatePage.generateBottom()))
   .then(copyFile());
